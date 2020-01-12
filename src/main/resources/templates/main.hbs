@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링부트 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+</head>
+<body>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>몹</th>
+            <th>위치</th>
+            <th>젠 예정 시간</th>
+            <th>남은 시간</th>
+            <th>컷</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#each monsters}}
+            <tr class="monsterGenTime" id="{{id}}">
+                <td>{{name}}</td>
+                <td>{{location}}</td>
+                <td class="genTime">{{genTimeStr}}</td>
+                <td class="remainTime"></td>
+                <td><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
+                <input type="hidden" name="genTime" value="{{genTime}}" />
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    <!--부트스트랩 js, jquery 추가-->
+    <script src="/js/lib/jquery.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+
+</body>
+<script>
+    $(document).ready(function(){
+        setInterval(function()
+        {
+            setRemainTime();
+        },1000);
+    })
+
+    function setRemainTime(){
+        $(".monsterGenTime").each(function(){
+            getRemainTime($(this).find("input[name='genTime']").val(), $(this).find(".remainTime"));
+        });
+    }
+
+    function getRemainTime(genTime, obj){
+        var now = new Date();
+        var time = new Date(genTime);
+        var gap = new Date(0,0,0,0,0,0,time-now);
+        var diffHour = gap.getHours();
+        var diffMin = gap.getMinutes();
+        var diffSec = gap.getSeconds();
+        if(diffHour == 0 && diffMin <=2){
+            obj.addClass("text-danger");
+        }else{
+            obj.removeClass("text-danger");
+        }
+        obj.text(diffHour+":"+diffMin+":"+diffSec);
+    }
+
+    function monsterCut(monsterID){
+        $.ajax({
+            url : '/updateGenTime',
+            type : 'post',
+            data : {id:monsterID},
+            success:function(data){
+                $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
+                $("#"+monsterID).find(".genTime").text(data.genTimeStr);
+            }
+        })
+    }
+</script>
+</html>
