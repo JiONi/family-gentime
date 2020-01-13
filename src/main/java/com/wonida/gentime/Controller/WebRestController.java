@@ -4,13 +4,17 @@ import com.wonida.gentime.DTO.MonsterInfoDTO;
 import com.wonida.gentime.DTO.MonsterResponseDTO;
 import com.wonida.gentime.service.MonsterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @RestController
 public class WebRestController {
 
     @Autowired
     private MonsterService monsterService;
+    private Environment env;
 
     @GetMapping("/hello")
     public String hello(){
@@ -26,6 +30,14 @@ public class WebRestController {
     public MonsterResponseDTO updateGenTime(@RequestParam("id") long id){
         return monsterService.updateGenTime(id);
 
+    }
+
+    @GetMapping("/profile")
+    public String getProfile () {
+        return Arrays.stream(env.getActiveProfiles())
+                .skip(1)
+                .findFirst()
+                .orElse("");
     }
     /*@PostMapping("/saveCutTime")
     public void saveCutTime(@RequestBody )*/
