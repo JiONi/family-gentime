@@ -49,7 +49,7 @@
 
     function setRemainTime(){
         $(".monsterGenTime").each(function(){
-            getRemainTime($(this).find("input[name='genTime']").val(), $(this).find("input[name='genTime']").val(), $(this).find(".remainTime"));
+            getRemainTime($(this).find("input[name='genTime']").val(), $(this).find("input[name='maxTime']").val(), $(this).find(".remainTime"));
         });
     }
 
@@ -63,6 +63,7 @@
 
         if(time < now){
             var maxTime = new Date(maxTime);
+
             if(now > maxTime){
                 obj.text("미아 상태");
             }else{
