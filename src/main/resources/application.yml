@@ -20,19 +20,13 @@ spring:
 ---
 spring.profiles: set1
 spring.profiles.include: real-db
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+
 server:
   port: 8081
 
 ---
 spring.profiles: set2
 spring.profiles.include: real-db
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+
 server:
   port: 8082
