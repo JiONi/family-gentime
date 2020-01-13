@@ -22,8 +22,10 @@ public class MonsterService {
     private MonsterRepository monsterRepository;
 
     @Transactional
-    public Long saveMonster(MonsterInfoDTO monsterInfoDTO){
-        return monsterRepository.save(monsterInfoDTO.toEntity()).getId();
+    public void saveMonster(MonsterInfoDTO monsterInfoDTO){
+        monsterRepository.save(monsterInfoDTO.toEntity()).getId();
+        monsterRepository.updateGenTime(monsterInfoDTO.toEntity().getId());
+        monsterRepository.updateMaxTime(monsterInfoDTO.toEntity().getId());
     }
 
     @Transactional(readOnly = true)

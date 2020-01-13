@@ -18,4 +18,9 @@ public class WebPageController {
         model.addAttribute("monsters", monsterService.findAll());
         return "main";
     }
+
+    @GetMapping("/adminPage")
+    public String adminPage(){
+        return "adminPage";
+    }
 }

@@ -24,6 +24,7 @@ public class WebRestController {
 
     @PostMapping("/saveMonster")
     public void saveMonster(@RequestBody MonsterInfoDTO monsterInfoDTO){
+
         monsterService.saveMonster(monsterInfoDTO);
     }
 

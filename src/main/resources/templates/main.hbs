@@ -22,7 +22,7 @@
         <tbody id="tbody">
         {{#each monsters}}
             <tr class="monsterGenTime" id="{{id}}">
-                <td>{{name}}</td>
+                <td>{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}</td>
                 <td>{{location}}</td>
                 <td class="genTime">{{genTimeStr}}</td>
                 <td class="remainTime"></td>
@@ -39,7 +39,7 @@
     <script src="/js/lib/bootstrap.min.js"></script>
 
 </body>
-<script>
+<script type="text/javascript">
     $(document).ready(function(){
         setInterval(function()
         {
@@ -65,12 +65,16 @@
             var maxTime = new Date(maxTime);
 
             if(now > maxTime){
+                obj.removeClass("text-primary");
+                obj.removeClass("text-danger");
                 obj.text("미아 상태");
             }else{
+                obj.removeClass();
+                obj.addClass("text-primary");
                 obj.text("젠 타임!!!");
             }
         }else{
-            if(diffHour == 0 && diffMin <=2){
+            if(diffHour == 0 && diffMin <=4){
                 obj.addClass("text-danger");
             }else{
                 obj.removeClass("text-danger");
@@ -93,5 +97,13 @@
             }
         })
     }
+
+    /*Handlebars.registerHelper('isIncomp', function(type, options) {
+        if(type == 'INCOMP'){
+            return true;
+        }else{
+            return false;
+        }
+    });*/
 </script>
 </html>

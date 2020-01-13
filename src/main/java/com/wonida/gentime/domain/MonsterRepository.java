@@ -19,4 +19,8 @@ public interface MonsterRepository extends JpaRepository<Monster, Long> {
     @Transactional
     void updateGenTime(Long id);
 
+    @Modifying
+    @Query(value="UPDATE monster SET max_time = date_add(gen_time, interval random_time MINUTE) where id = ?1",nativeQuery=true)
+    @Transactional
+    void updateMaxTime(Long id);
 }

@@ -13,13 +13,19 @@ import java.sql.Time;
 public class MonsterInfoDTO {
     private String name;
     private String location;
+    private String cutTime;
     private int genTerm;
+    private int randomTime;
+    private boolean mobType;
 
     public Monster toEntity(){
         return Monster.builder()
                 .name(name)
                 .location(location)
+                .cutTime(cutTime)
                 .genTerm(genTerm)
+                .randomTime(randomTime)
+                .mobType(mobType)
                 .build();
     }
 }

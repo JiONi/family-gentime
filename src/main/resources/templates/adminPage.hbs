@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>네임드 젠타임 관리</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--부트스트랩 css 추가-->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<form id="monsterInfo" action="/saveMonster" method="post">
+
+    <div class="form-group">
+        <label for="name">몹 이름</label>
+        <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <div class="form-group">
+        <label for="location">젠 위치</label>
+        <input type="text" class="form-control" id="location" name="location">
+    </div>
+    <div class="form-group">
+        <label for="genTerm">젠 간격(분으로 계산)</label>
+        <input type="number" class="form-control" id="genTerm" name="genTerm">
+    </div>
+    <!--<div class="form-group">
+        <label for="cutTime">최종 컷 시간 (yy-MM-dd hh:MM:ss)</label>
+        <input type="text" class="form-control" id="cutTime">
+    </div>-->
+    <div class="form-group">
+        <label for="randomTime">랜덤 시간(분으로 계산)</label>
+        <input type="text" class="form-control" id="randomTime" name="randomTime">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="mobType" value="true" name="mobType">
+        <label class="form-check-label" for="mobType">불완전한 존재</label>
+    </div>
+    <button type="button" class="btn btn-primary" id="submit" onclick="saveMobInfo()">Submit</button>
+</form>
+</div>
+
+<!--부트스트랩 js, jquery 추가-->
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+
+</body>
+<script>
+    function saveMobInfo(){
+        $.ajax({
+            url:'/saveMonster',
+            type:'post',
+            data : $("#monsterInfo").serialize(),
+            success:function(){
+                alert("저장 성공");
+            }
+        })
+    }
+</script>
