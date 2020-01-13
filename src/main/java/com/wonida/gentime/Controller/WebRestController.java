@@ -14,6 +14,7 @@ public class WebRestController {
 
     @Autowired
     private MonsterService monsterService;
+    @Autowired
     private Environment env;
 
     @GetMapping("/hello")
@@ -35,7 +36,6 @@ public class WebRestController {
     @GetMapping("/profile")
     public String getProfile () {
         return Arrays.stream(env.getActiveProfiles())
-                .skip(1)
                 .findFirst()
                 .orElse("");
     }
