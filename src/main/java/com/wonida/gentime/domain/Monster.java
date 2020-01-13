@@ -35,10 +35,10 @@ public class Monster {
     private Timestamp maxTime;
 
     @Column
-    private Time genTerm;
+    private int genTerm;
 
     @Builder
-    public Monster(String name, String location, Time genTerm){
+    public Monster(String name, String location, int genTerm){
         this.name = name;
         this.location = location;
         this.genTerm = genTerm;

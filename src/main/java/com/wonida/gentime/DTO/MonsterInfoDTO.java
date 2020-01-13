@@ -13,7 +13,7 @@ import java.sql.Time;
 public class MonsterInfoDTO {
     private String name;
     private String location;
-    private Time genTerm;
+    private int genTerm;
 
     public Monster toEntity(){
         return Monster.builder()
