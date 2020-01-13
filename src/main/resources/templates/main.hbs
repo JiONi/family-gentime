@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>스프링부트 웹서비스</title>
+    <title>네임드 젠타임 관리</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
 </head>
 <body>
-    <h2>Ver.2</h2>
     <!-- 목록 출력 영역 -->
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
@@ -60,12 +59,20 @@
         var diffHour = gap.getHours();
         var diffMin = gap.getMinutes();
         var diffSec = gap.getSeconds();
-        if(diffHour == 0 && diffMin <=2){
-            obj.addClass("text-danger");
+
+        if(diffHour == 0 && diffMin == 0 && diffSec == 0){
+            obj.text("젠 타임!!!");
         }else{
-            obj.removeClass("text-danger");
+            if(diffHour == 0 && diffMin <=2){
+                obj.addClass("text-danger");
+            }else{
+                obj.removeClass("text-danger");
+            }
+            obj.text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
         }
-        obj.text(diffHour+":"+diffMin+":"+diffSec);
+
+
+
     }
 
     function monsterCut(monsterID){
