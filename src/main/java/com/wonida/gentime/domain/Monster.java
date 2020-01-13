@@ -36,11 +36,15 @@ public class Monster {
     @Column
     private int genTerm;
 
+    @Column
+    private int randomTime;
+
     @Builder
-    public Monster(String name, String location, int genTerm){
+    public Monster(String name, String location, int genTerm, int randomTime){
         this.name = name;
         this.location = location;
         this.genTerm = genTerm;
+        this.randomTime = randomTime;
     }
 
     public Monster(Timestamp cutTime){

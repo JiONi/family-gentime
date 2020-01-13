@@ -15,6 +15,7 @@ public class MonsterResponseDTO {
     private String location;
     private Timestamp genTime;
     private String genTimeStr;
+    private Timestamp maxTime;
 
     public MonsterResponseDTO(Monster entity){
         id = entity.getId();
@@ -22,7 +23,7 @@ public class MonsterResponseDTO {
         location = entity.getLocation();
         genTime = entity.getGenTime();
         genTimeStr = toStringDateTime(entity.getGenTime().toLocalDateTime());
-
+        maxTime = entity.getMaxTime();
     }
 
     private String toStringDateTime(LocalDateTime localDateTime){

@@ -28,6 +28,7 @@
                 <td class="remainTime"></td>
                 <td><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
                 <input type="hidden" name="genTime" value="{{genTime}}" />
+                <input type="hidden" name="maxTime" value="{{maxTime}}" />
             </tr>
         {{/each}}
         </tbody>
@@ -48,11 +49,11 @@
 
     function setRemainTime(){
         $(".monsterGenTime").each(function(){
-            getRemainTime($(this).find("input[name='genTime']").val(), $(this).find(".remainTime"));
+            getRemainTime($(this).find("input[name='genTime']").val(), $(this).find("input[name='genTime']").val(), $(this).find(".remainTime"));
         });
     }
 
-    function getRemainTime(genTime, obj){
+    function getRemainTime(genTime, maxTime, obj){
         var now = new Date();
         var time = new Date(genTime);
         var gap = new Date(0,0,0,0,0,0,time-now);
@@ -60,8 +61,13 @@
         var diffMin = gap.getMinutes();
         var diffSec = gap.getSeconds();
 
-        if(diffHour == 0 && diffMin == 0 && diffSec == 0){
-            obj.text("젠 타임!!!");
+        if(time < now){
+            var maxTime = new Date(maxTime);
+            if(now > maxTime){
+                obj.text("미아 상태");
+            }else{
+                obj.text("젠 타임!!!");
+            }
         }else{
             if(diffHour == 0 && diffMin <=2){
                 obj.addClass("text-danger");
