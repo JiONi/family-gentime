@@ -24,7 +24,7 @@ public interface MonsterRepository extends JpaRepository<Monster, Long> {
     @Query("SELECT m " +
             "FROM Monster m " +
             "WHERE m.genTerm between (?1-10) and ?1 " +
-            "ORDER BY m.genTerm, m.genTime")
+            "ORDER BY m.genTime")
     Stream<Monster> findAllByGenTerm(int genTerm);
 
     @Modifying
