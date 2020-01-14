@@ -87,15 +87,19 @@
     }
 
     function monsterCut(monsterID){
-        $.ajax({
-            url : '/updateGenTime',
-            type : 'post',
-            data : {id:monsterID},
-            success:function(data){
-                $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
-                $("#"+monsterID).find(".genTime").text(data.genTimeStr);
-            }
-        })
+        if(confirm("현재 시간으로 컷 타임을 저장하시겠습니까?")){
+            $.ajax({
+                url : '/updateGenTime',
+                type : 'post',
+                data : {id:monsterID},
+                success:function(data){
+                    $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
+                    $("#"+monsterID).find(".genTime").text(data.genTimeStr);
+                }
+            });
+        }else{
+            return false;
+        }
     }
 
     /*Handlebars.registerHelper('isIncomp', function(type, options) {
