@@ -33,12 +33,18 @@ public class MonsterService {
         return monsterRepository.findAll().stream().map(MonsterResponseDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<MonsterResponseDTO> findAllDesc() {
+        return monsterRepository.findAllDesc().map(MonsterResponseDTO::new).collect(Collectors.toList());
+    }
+
     @Transactional
     public MonsterResponseDTO updateGenTime(Long id){
         LocalDateTime localDateTime = LocalDateTime.now();
         Timestamp cutTime = Timestamp.valueOf(localDateTime);
         monsterRepository.updateCutTime(cutTime, id);
         monsterRepository.updateGenTime(id);
+        monsterRepository.updateMaxTime(id);
         MonsterResponseDTO result = new MonsterResponseDTO(monsterRepository.findById(id).get());
         return result;
     }

@@ -17,6 +17,7 @@ public class MonsterResponseDTO {
     private String genTimeStr;
     private Timestamp maxTime;
     private boolean mobType;
+    private int mobGroup;
 
     public MonsterResponseDTO(Monster entity){
         id = entity.getId();
@@ -26,6 +27,7 @@ public class MonsterResponseDTO {
         genTimeStr = toStringDateTime(entity.getGenTime().toLocalDateTime());
         maxTime = entity.getMaxTime();
         mobType = entity.isMobType();
+        mobGroup = entity.getMobGroup();
     }
 
     private String toStringDateTime(LocalDateTime localDateTime){

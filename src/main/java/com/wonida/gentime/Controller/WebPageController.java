@@ -15,7 +15,7 @@ public class WebPageController {
 
     @GetMapping("/")
     public String main(Model model){
-        model.addAttribute("monsters", monsterService.findAll());
+        model.addAttribute("monsters", monsterService.findAllDesc());
         return "main";
     }
 

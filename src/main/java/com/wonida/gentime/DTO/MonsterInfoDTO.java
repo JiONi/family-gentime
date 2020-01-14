@@ -17,6 +17,7 @@ public class MonsterInfoDTO {
     private int genTerm;
     private int randomTime;
     private boolean mobType;
+    private int mobGroup;
 
     public Monster toEntity(){
         return Monster.builder()
@@ -26,6 +27,7 @@ public class MonsterInfoDTO {
                 .genTerm(genTerm)
                 .randomTime(randomTime)
                 .mobType(mobType)
+                .mobGroup(mobGroup)
                 .build();
     }
 }

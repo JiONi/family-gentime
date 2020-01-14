@@ -45,14 +45,18 @@ public class Monster {
     @Column(columnDefinition = "default false")
     private boolean mobType;
 
+    @Column
+    private int mobGroup;
+
     @Builder
-    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime){
+    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup){
         this.name = name;
         this.location = location;
         this.genTerm = genTerm;
         this.randomTime = randomTime;
         this.mobType = mobType;
         this.cutTime = toTimeStampString(cutTime);
+        this.mobGroup = mobGroup;
     }
 
     public Monster(Timestamp cutTime){
