@@ -6,8 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    <style>
+        [class*="col-"] {
+            padding: 8px;
+            border: 1px solid rgba(80,80,80,0.1);
+            text-align: center;
+        }
+        [class*="hour"] {
+            padding: 8px;
+            border: 1px solid #005cbf;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<div class="container float-left">
+    <ul class="list-group list-group-horizontal" style="width:800px; margin:10px 10px;">
+        <a href="/" id="totalList" class="list-group-item list-group-item-action">전체보기</a>
+        <a href="/genTermList?genTerm=180" id="genTerm180" class="list-group-item list-group-item-action">3시간 젠</a>
+        <a href="/genTermList?genTerm=240" id="genTerm240" class="list-group-item list-group-item-action">4시간 젠</a>
+        <a href="/genTermList?genTerm=300" id="genTerm300" class="list-group-item list-group-item-action">5시간 젠</a>
+        <a href="/genTermList?genTerm=480" id="genTerm480" class="list-group-item list-group-item-action">8시간 젠</a>
+        <a href="/genTermList?genTerm=720" id="genTerm720" class="list-group-item list-group-item-action">12시간 젠</a>
+    </ul>
+</div>
     <!-- 목록 출력 영역 -->
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
@@ -20,17 +42,17 @@
         </tr>
         </thead>
         <tbody id="tbody">
-        {{#each monsters}}
-            <tr class="monsterGenTime" id="{{id}}">
-                <td>{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}</td>
-                <td>{{location}}</td>
-                <td class="genTime">{{genTimeStr}}</td>
-                <td class="remainTime"></td>
-                <td><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
-                <input type="hidden" name="genTime" value="{{genTime}}" />
-                <input type="hidden" name="maxTime" value="{{maxTime}}" />
-            </tr>
-        {{/each}}
+            {{#monsters}}
+                <tr class="monsterGenTime" id="{{id}}">
+                    <td>{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
+                    <td>{{location}}</td>
+                    <td class="genTime">{{genTimeStr}}</td>
+                    <td class="remainTime"></td>
+                    <td><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
+                    <input type="hidden" name="genTime" value="{{genTime}}" />
+                    <input type="hidden" name="maxTime" value="{{maxTime}}" />
+                </tr>
+            {{/monsters}}
         </tbody>
     </table>
 
@@ -38,14 +60,31 @@
     <script src="/js/lib/jquery.min.js"></script>
     <script src="/js/lib/bootstrap.min.js"></script>
 
+
 </body>
 <script type="text/javascript">
+    var param = "{{genTerm}}";
+    console.log(param);
     $(document).ready(function(){
         setInterval(function()
         {
             setRemainTime();
         },1000);
-    })
+
+
+        if(param == ""){
+            $("#totalList").addClass("list-group-item-primary");
+        }else{
+            $("#genTerm"+param).addClass("list-group-item-primary");
+        }
+    });
+
+    Handlebars.registerHelper("ifCond", function(v1,v2, options) {
+        if(v1 === v2) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    });
 
     function setRemainTime(){
         $(".monsterGenTime").each(function(){
@@ -69,7 +108,7 @@
                 obj.removeClass("text-danger");
                 obj.text("미아 상태");
             }else{
-                obj.removeClass();
+                obj.removeClass("text-danger");
                 obj.addClass("text-primary");
                 obj.text("젠 타임!!!");
             }
@@ -103,12 +142,37 @@
         }
     }
 
-    /*Handlebars.registerHelper('isIncomp', function(type, options) {
-        if(type == 'INCOMP'){
-            return true;
-        }else{
-            return false;
-        }
-    });*/
+
+
+    function getGenList(mobGroup){
+        $.ajax({
+            url : '/selectGenList',
+            type : 'post',
+            data : {mobGroup : mobGroup},
+            success : function(data){
+                drawList(data);
+            }
+        })
+    }
+
+    function drawList(listData){
+       /* console.log(listData);
+        //핸들바 템플릿 가져오기
+        var source = $("#entry-template").html();
+
+        //핸들바 템플릿 컴파일
+        var template = Handlebars.compile(source);
+
+        //핸들바 템플릿에 바인딩할 데이터
+        var data = {
+            monsters: listData
+        };
+
+        //핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
+        var html = template(data);
+
+        //생성된 HTML을 DOM에 주입
+        $("#tbody").append(html);*/
+    }
 </script>
 </html>

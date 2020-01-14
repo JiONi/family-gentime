@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 public class WebRestController {
@@ -31,7 +32,11 @@ public class WebRestController {
     @PostMapping("/updateGenTime")
     public MonsterResponseDTO updateGenTime(@RequestParam("id") long id){
         return monsterService.updateGenTime(id);
+    }
 
+    @PostMapping("/selectGenList")
+    public List<MonsterResponseDTO> selectGenList(@RequestParam("mobGroup") int mobGroup){
+        return monsterService.findAllByMobGroup(mobGroup);
     }
 
     @GetMapping("/profile")

@@ -38,6 +38,20 @@ public class MonsterService {
         return monsterRepository.findAllDesc().map(MonsterResponseDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<MonsterResponseDTO> findAllByMobGroup(int mobGroup){
+        if(mobGroup == 0){
+            return monsterRepository.findAllDesc().map(MonsterResponseDTO::new).collect(Collectors.toList());
+        }else{
+            return monsterRepository.findAllByMobGroup(mobGroup).map(MonsterResponseDTO::new).collect(Collectors.toList());
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<MonsterResponseDTO> findAllByGenTerm(int genTerm){
+        return monsterRepository.findAllByGenTerm(genTerm).map(MonsterResponseDTO::new).collect(Collectors.toList());
+    }
+
     @Transactional
     public MonsterResponseDTO updateGenTime(Long id){
         LocalDateTime localDateTime = LocalDateTime.now();

@@ -18,6 +18,7 @@ public class MonsterResponseDTO {
     private Timestamp maxTime;
     private boolean mobType;
     private int mobGroup;
+    private int channel;
 
     public MonsterResponseDTO(Monster entity){
         id = entity.getId();
@@ -28,6 +29,7 @@ public class MonsterResponseDTO {
         maxTime = entity.getMaxTime();
         mobType = entity.isMobType();
         mobGroup = entity.getMobGroup();
+        channel = entity.getChannel();
     }
 
     private String toStringDateTime(LocalDateTime localDateTime){

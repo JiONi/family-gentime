@@ -15,6 +15,18 @@ public interface MonsterRepository extends JpaRepository<Monster, Long> {
             "ORDER BY m.mobGroup, m.genTerm, m.genTime")
     Stream<Monster> findAllDesc();
 
+    @Query("SELECT m " +
+            "FROM Monster m " +
+            "WHERE m.mobGroup = ?1 " +
+            "ORDER BY m.genTerm, m.genTime")
+    Stream<Monster> findAllByMobGroup(int mobGroup);
+
+    @Query("SELECT m " +
+            "FROM Monster m " +
+            "WHERE m.genTerm between (?1-10) and ?1 " +
+            "ORDER BY m.genTerm, m.genTime")
+    Stream<Monster> findAllByGenTerm(int genTerm);
+
     @Modifying
     @Query("UPDATE Monster m SET m.cutTime = ?1 where m.id = ?2")
     @Transactional

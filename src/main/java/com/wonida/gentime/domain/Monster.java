@@ -48,6 +48,9 @@ public class Monster {
     @Column
     private int mobGroup;
 
+    @Column(columnDefinition = "default 0")
+    private int channel;
+
     @Builder
     public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup){
         this.name = name;
