@@ -6,14 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.stream.Stream;
 
 public interface MonsterRepository extends JpaRepository<Monster, Long> {
 
     @Query("SELECT m " +
             "FROM Monster m " +
-            "ORDER BY m.mobGroup, m.genTerm, m.genTime DESC")
+            "ORDER BY m.mobGroup, m.genTerm, m.genTime")
     Stream<Monster> findAllDesc();
 
     @Modifying
