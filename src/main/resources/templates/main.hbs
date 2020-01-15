@@ -34,23 +34,30 @@
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
-            <th>몹</th>
-            <th>위치</th>
-            <th>젠 예정 시간</th>
-            <th>남은 시간</th>
-            <th>컷</th>
+            <th style="width:150px;">몹</th>
+            <th style="width:150px;">위치</th>
+            <th style="width:150px;">젠 예정 시간</th>
+            <th style="width:200px;">남은 시간</th>
+            <th style="width:200px;">컷</th>
+            <th style="width:300px;">메모</th>
         </tr>
         </thead>
         <tbody id="tbody">
             {{#monsters}}
                 <tr class="monsterGenTime" id="{{id}}">
-                    <td>{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
-                    <td>{{location}}</td>
-                    <td class="genTime">{{genTimeStr}}</td>
-                    <td class="remainTime"></td>
-                    <td><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
+                    <td style="width:150px;">{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
+                    <td style="width:150px;">{{location}}</td>
+                    <td class="genTime" style="width:150px;">{{genTimeStr}}</td>
+                    <td class="remainTime" style="width:200px;"></td>
+                    <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
                     <input type="hidden" name="genTime" value="{{genTime}}" />
                     <input type="hidden" name="maxTime" value="{{maxTime}}" />
+                    <td style="width:300px;">
+                        <div class="input-group">
+                            <textarea class="form-control" style="height:35px;" name="memo" placeholder="해당 몹에 대한 메모를 입력해주세요.">{{memo}}</textarea>
+                            <button type="button" class="btn btn-secondary" onclick="saveMemo('{{id}}')">입력</button>
+                        </div>
+                    </td>
                 </tr>
             {{/monsters}}
         </tbody>
@@ -153,6 +160,24 @@
                 drawList(data);
             }
         })
+    }
+
+    function saveMemo(monsterID){
+        var memo = $("#"+monsterID).find("textarea[name='memo']").val();
+        if(memo == "" || memo == null){
+            alert("입력된 내용이 없습니다.");
+            return;
+        }else{
+            $.ajax({
+                url : '/updateMonsterMemo',
+                type : 'post',
+                data : {memo:memo, id:monsterID},
+                success : function(){
+                    alert("메모 입력이 완료되었습니다.");
+                }
+            });
+        }
+
     }
 
     function drawList(listData){

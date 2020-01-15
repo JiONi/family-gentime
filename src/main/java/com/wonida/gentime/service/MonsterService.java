@@ -62,4 +62,9 @@ public class MonsterService {
         MonsterResponseDTO result = new MonsterResponseDTO(monsterRepository.findById(id).get());
         return result;
     }
+
+    @Transactional
+    public int updateMonsterMemo(String memo, Long id){
+        return monsterRepository.updateMonsterMemo(memo, id);
+    }
 }

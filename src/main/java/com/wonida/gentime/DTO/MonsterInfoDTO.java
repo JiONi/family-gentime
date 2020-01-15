@@ -18,6 +18,7 @@ public class MonsterInfoDTO {
     private int randomTime;
     private boolean mobType;
     private int mobGroup;
+    private String memo;
 
     public Monster toEntity(){
         return Monster.builder()
@@ -28,6 +29,7 @@ public class MonsterInfoDTO {
                 .randomTime(randomTime)
                 .mobType(mobType)
                 .mobGroup(mobGroup)
+                .memo(memo)
                 .build();
     }
 }

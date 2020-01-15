@@ -39,6 +39,11 @@ public class WebRestController {
         return monsterService.findAllByMobGroup(mobGroup);
     }
 
+    @PostMapping("/updateMonsterMemo")
+    public int updateMonsterMemo(@RequestParam("memo") String memo, @RequestParam("id") long id){
+        return monsterService.updateMonsterMemo(memo, id);
+    }
+
     @GetMapping("/profile")
     public String getProfile () {
         return Arrays.stream(env.getActiveProfiles())

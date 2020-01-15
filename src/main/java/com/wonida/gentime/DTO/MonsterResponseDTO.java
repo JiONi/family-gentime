@@ -19,6 +19,7 @@ public class MonsterResponseDTO {
     private boolean mobType;
     private int mobGroup;
     private int channel;
+    private String memo;
 
     public MonsterResponseDTO(Monster entity){
         id = entity.getId();
@@ -30,6 +31,7 @@ public class MonsterResponseDTO {
         mobType = entity.isMobType();
         mobGroup = entity.getMobGroup();
         channel = entity.getChannel();
+        memo = entity.getMemo();
     }
 
     private String toStringDateTime(LocalDateTime localDateTime){

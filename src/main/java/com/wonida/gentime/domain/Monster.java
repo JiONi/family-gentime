@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -42,17 +39,20 @@ public class Monster {
     @Column
     private int randomTime;
 
-    @Column(columnDefinition = "default false")
+    @Column(nullable = false, columnDefinition = "tinyint default 1")
     private boolean mobType;
 
     @Column
     private int mobGroup;
 
-    @Column(columnDefinition = "default 0")
+    @Column(columnDefinition = "integer default 0")
     private int channel;
 
+    @Column(length = 200)
+    private String memo;
+
     @Builder
-    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup){
+    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup,String memo){
         this.name = name;
         this.location = location;
         this.genTerm = genTerm;
@@ -60,6 +60,7 @@ public class Monster {
         this.mobType = mobType;
         this.cutTime = toTimeStampString(cutTime);
         this.mobGroup = mobGroup;
+        this.memo = memo;
     }
 
     public Monster(Timestamp cutTime){
