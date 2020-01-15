@@ -30,6 +30,9 @@
         <a href="/genTermList?genTerm=720" id="genTerm720" class="list-group-item list-group-item-action">12시간 젠</a>
     </ul>
 </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl" style="margin-top:15px;">허상 파랭이 위치 보기</button>
+
     <!-- 목록 출력 영역 -->
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
@@ -62,7 +65,14 @@
             {{/monsters}}
         </tbody>
     </table>
-
+<!-- Modal -->
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+           <img src="/image/lib/namedMobLocation.jpg" />
+        </div>
+    </div>
+</div>
     <!--부트스트랩 js, jquery 추가-->
     <script src="/js/lib/jquery.min.js"></script>
     <script src="/js/lib/bootstrap.min.js"></script>
