@@ -47,7 +47,7 @@
                 <tr class="monsterGenTime" id="{{id}}">
                     <td style="width:150px;">{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
                     <td style="width:150px;">{{location}}</td>
-                    <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-warning" style="font-size: 10px;" name="nextMobGen"></p></td>
+                    <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-success" style="font-size: 10px;" name="nextMobGen"></p></td>
                     <td class="remainTime" style="width:200px;"></td>
                     <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
                     <input type="hidden" name="genTime" value="{{genTime}}" />
