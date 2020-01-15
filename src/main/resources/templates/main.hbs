@@ -47,7 +47,7 @@
                 <tr class="monsterGenTime" id="{{id}}">
                     <td style="width:150px;">{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
                     <td style="width:150px;">{{location}}</td>
-                    <td class="genTime" style="width:150px;">{{genTimeStr}}</td>
+                    <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-warning" style="font-size: 10px;" name="nextMobGen"></p></td>
                     <td class="remainTime" style="width:200px;"></td>
                     <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
                     <input type="hidden" name="genTime" value="{{genTime}}" />
@@ -76,6 +76,7 @@
         setInterval(function()
         {
             setRemainTime();
+            nextMobGen();
         },1000);
 
 
@@ -178,6 +179,27 @@
             });
         }
 
+    }
+
+    function nextMobGen(){
+        var totalLength = $(".monsterGenTime").length;
+        $(".monsterGenTime").each(function(index){
+            var objThis = $(".monsterGenTime").eq(index);
+            var objNext = $(".monsterGenTime").eq(index+1);
+
+            if(objThis.find(".remainTime").text() != "미아 상태" && index != totalLength-1){
+                var thisTime = new Date(objThis.find("input[name='genTime']").val());
+                var nextTime = new Date(objNext.find("input[name='genTime']").val());
+                var gap = new Date(0,0,0,0,0,0,nextTime-thisTime);
+                var diffHour = gap.getHours();
+                var diffMin = gap.getMinutes();
+                var diffSec = gap.getSeconds();
+
+                objThis.find("[name='nextMobGen']").text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
+            }else{
+                objThis.find("[name='nextMobGen']").text("");
+            }
+        });
     }
 
     function drawList(listData){
