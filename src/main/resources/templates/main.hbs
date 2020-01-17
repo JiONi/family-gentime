@@ -201,7 +201,21 @@
                 var diffMin = gap.getMinutes();
                 var diffSec = gap.getSeconds();
 
-                objThis.find("[name='nextMobGen']").text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
+                if(diffHour == 0){
+                    if(diffMin < 5){
+                        objThis.find("[name='nextMobGen']").addClass("text-danger");
+                        objThis.find("[name='nextMobGen']").removeClass("text-success")
+                    }
+                    if(diffMin == 0){
+                        objThis.find("[name='nextMobGen']").text(diffSec+"초");
+                    }else{
+                        objThis.find("[name='nextMobGen']").text(diffMin+"분 "+diffSec+"초");
+                    }
+
+                }else{
+                    objThis.find("[name='nextMobGen']").text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
+                }
+
             }else{
                 objThis.find("[name='nextMobGen']").text("");
             }
