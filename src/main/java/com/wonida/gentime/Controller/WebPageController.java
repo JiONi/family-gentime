@@ -34,6 +34,7 @@ public class WebPageController {
         if(memberService.getMemberByUserId(key) == null){
             return "error";
         }else{
+            memberService.increaseAccessCount(key);
             model.addAttribute("key",key);
             model.addAttribute("monsters", monsterService.findAllByGenTerm(genTerm));
             model.addAttribute("genTerm", genTerm);

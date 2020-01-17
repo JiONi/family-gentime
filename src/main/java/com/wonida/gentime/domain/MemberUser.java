@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -21,5 +22,8 @@ public class MemberUser {
 
     @Column
     private Long accessCount;
+
+    @Column
+    private Timestamp lastAccessTime;
 
 }

@@ -5,6 +5,8 @@ import com.wonida.gentime.domain.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -24,6 +26,9 @@ public class MemberService {
     }
 
     public void increaseAccessCount(String userId){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Timestamp accessTime = Timestamp.valueOf(localDateTime);
+        memberRepository.updateLastAccessTime(accessTime,userId);
         memberRepository.increaseAccessCount(userId);
     }
 }
