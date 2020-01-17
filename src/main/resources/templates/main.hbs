@@ -22,13 +22,13 @@
 <body>
 <div class="container float-left">
     <ul class="list-group list-group-horizontal" style="width:800px; margin:10px 10px;">
-        <a href="/" id="totalList" class="list-group-item list-group-item-action">전체보기</a>
-        <a href="/genTermList?genTerm=180" id="genTerm180" class="list-group-item list-group-item-action">3시간 젠</a>
-        <a href="/genTermList?genTerm=240" id="genTerm240" class="list-group-item list-group-item-action">4시간 젠</a>
-        <a href="/genTermList?genTerm=300" id="genTerm300" class="list-group-item list-group-item-action">5시간 젠</a>
-        <a href="/genTermList?genTerm=480" id="genTerm480" class="list-group-item list-group-item-action">8시간 젠</a>
-        <a href="/genTermList?genTerm=600" id="genTerm600" class="list-group-item list-group-item-action">10시간 젠</a>
-        <a href="/genTermList?genTerm=720" id="genTerm720" class="list-group-item list-group-item-action">12시간 젠</a>
+        <a href="/{{key}}" id="totalList" class="list-group-item list-group-item-action">전체보기</a>
+        <a href="/{{key}}/genTermList?genTerm=180" id="genTerm180" class="list-group-item list-group-item-action">3시간 젠</a>
+        <a href="/{{key}}/genTermList?genTerm=240" id="genTerm240" class="list-group-item list-group-item-action">4시간 젠</a>
+        <a href="/{{key}}/genTermList?genTerm=300" id="genTerm300" class="list-group-item list-group-item-action">5시간 젠</a>
+        <a href="/{{key}}/genTermList?genTerm=480" id="genTerm480" class="list-group-item list-group-item-action">8시간 젠</a>
+        <a href="/{{key}}/genTermList?genTerm=600" id="genTerm600" class="list-group-item list-group-item-action">10시간 젠</a>
+        <a href="/{{key}}/genTermList?genTerm=720" id="genTerm720" class="list-group-item list-group-item-action">12시간 젠</a>
     </ul>
 </div>
 <!-- Button trigger modal -->
@@ -82,6 +82,7 @@
 </body>
 <script type="text/javascript">
     var param = "{{genTerm}}";
+
     console.log(param);
     $(document).ready(function(){
         setInterval(function()

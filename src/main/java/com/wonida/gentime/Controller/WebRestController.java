@@ -2,6 +2,7 @@ package com.wonida.gentime.Controller;
 import com.wonida.gentime.DTO.GenTimeSettingDTO;
 import com.wonida.gentime.DTO.MonsterInfoDTO;
 import com.wonida.gentime.DTO.MonsterResponseDTO;
+import com.wonida.gentime.service.MemberService;
 import com.wonida.gentime.service.MonsterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -25,7 +26,6 @@ public class WebRestController {
 
     @PostMapping("/saveMonster")
     public void saveMonster(@RequestBody MonsterInfoDTO monsterInfoDTO){
-
         monsterService.saveMonster(monsterInfoDTO);
     }
 
