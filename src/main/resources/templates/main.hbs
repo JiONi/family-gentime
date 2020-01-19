@@ -91,11 +91,6 @@
             nextMobGen();
         },1000);
 
-        setInterval(function()
-        {
-            location.reload();
-        },5000);
-
 
         if(param == ""){
             $("#totalList").addClass("list-group-item-primary");
@@ -154,6 +149,7 @@
                     $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
                     $("#"+monsterID).find("input[name='maxTime']").val(data.maxTime);
                     $("#"+monsterID).find(".genTime").text(data.genTimeStr);
+                    location.reload();
                 }
             });
         }else{
