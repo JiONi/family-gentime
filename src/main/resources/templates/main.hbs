@@ -91,6 +91,11 @@
             nextMobGen();
         },1000);
 
+        setInterval(function()
+        {
+            location.reload();
+        },5000);
+
 
         if(param == ""){
             $("#totalList").addClass("list-group-item-primary");
