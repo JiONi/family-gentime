@@ -149,6 +149,7 @@
                     $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
                     $("#"+monsterID).find("input[name='maxTime']").val(data.maxTime);
                     $("#"+monsterID).find(".genTime").text(data.genTimeStr);
+                    location.reload();
                 }
             });
         }else{
@@ -181,6 +182,7 @@
                 data : {memo:memo, id:monsterID},
                 success : function(){
                     alert("메모 입력이 완료되었습니다.");
+                    location.reload();
                 }
             });
         }
