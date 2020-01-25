@@ -38,18 +38,23 @@ public class MonsterService {
         return monsterRepository.findAllDesc().map(MonsterResponseDTO::new).collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
+    /*@Transactional(readOnly = true)
     public List<MonsterResponseDTO> findAllByMobGroup(int mobGroup){
         if(mobGroup == 0){
             return monsterRepository.findAllDesc().map(MonsterResponseDTO::new).collect(Collectors.toList());
         }else{
             return monsterRepository.findAllByMobGroup(mobGroup).map(MonsterResponseDTO::new).collect(Collectors.toList());
         }
-    }
+    }*/
 
     @Transactional(readOnly = true)
     public List<MonsterResponseDTO> findAllByGenTerm(int genTerm){
         return monsterRepository.findAllByGenTerm(genTerm).map(MonsterResponseDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MonsterResponseDTO> findAllByMobGroup(int runatra, int silunas, boolean type){
+        return monsterRepository.findAllByMobGroup(runatra, silunas, type).map(MonsterResponseDTO::new).collect(Collectors.toList());
     }
 
     @Transactional

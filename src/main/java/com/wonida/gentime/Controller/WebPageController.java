@@ -42,6 +42,19 @@ public class WebPageController {
         }
     }
 
+    @GetMapping("/{key}/mobGroup")
+    public String selectByMobGroup(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model){
+        if(memberService.getMemberByUserId(key) == null){
+            return "error";
+        }else{
+            memberService.increaseAccessCount(key);
+            model.addAttribute("key",key);
+            model.addAttribute("monsters", monsterService.findAllByMobGroup(mobGroup, mobGroup+1, true));
+            model.addAttribute("mobGroup", mobGroup);
+            return "main";
+        }
+    }
+
     @GetMapping("/adminPage")
     public String adminPage(){
         return "adminPage";

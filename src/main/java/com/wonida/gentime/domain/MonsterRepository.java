@@ -12,20 +12,18 @@ public interface MonsterRepository extends JpaRepository<Monster, Long> {
 
     @Query("SELECT m " +
             "FROM Monster m " +
+            "WHERE m.mobType = true " +
             "ORDER BY m.genTime")
     Stream<Monster> findAllDesc();
-
-    @Query("SELECT m " +
-            "FROM Monster m " +
-            "WHERE m.mobGroup = ?1 " +
-            "ORDER BY m.genTerm, m.genTime")
-    Stream<Monster> findAllByMobGroup(int mobGroup);
 
     @Query("SELECT m " +
             "FROM Monster m " +
             "WHERE m.genTerm between (?1-10) and (?1+40) " +
             "ORDER BY m.genTime")
     Stream<Monster> findAllByGenTerm(int genTerm);
+
+    @Query("SELECT m  FROM Monster  m WHERE m.mobGroup in (?1, ?2) AND m.mobType = ?3 ORDER BY m.genTime")
+    Stream<Monster> findAllByMobGroup(int runatra, int silunas, boolean type);
 
     @Modifying
     @Query("UPDATE Monster m SET m.cutTime = ?1 where m.id = ?2")

@@ -34,10 +34,6 @@ public class WebRestController {
         return monsterService.updateGenTime(id);
     }
 
-    @PostMapping("/selectGenList")
-    public List<MonsterResponseDTO> selectGenList(@RequestParam("mobGroup") int mobGroup){
-        return monsterService.findAllByMobGroup(mobGroup);
-    }
 
     @PostMapping("/updateMonsterMemo")
     public int updateMonsterMemo(@RequestParam("memo") String memo, @RequestParam("id") long id){
