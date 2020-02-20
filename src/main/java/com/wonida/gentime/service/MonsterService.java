@@ -62,6 +62,11 @@ public class MonsterService {
         return monsterRepository.findAllByMobGroupGeneral(mobGroup, type).map(MonsterResponseDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<MonsterResponseDTO> findAllByEventMob(){
+        return monsterRepository.findAllByEventMob().map(MonsterResponseDTO::new).collect(Collectors.toList());
+    }
+
     @Transactional
     public MonsterResponseDTO updateGenTime(Long id){
         LocalDateTime localDateTime = LocalDateTime.now();

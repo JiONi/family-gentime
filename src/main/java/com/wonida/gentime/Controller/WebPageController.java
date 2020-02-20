@@ -68,6 +68,19 @@ public class WebPageController {
         }
     }
 
+    @GetMapping("/{key}/eventMob")
+    public String selectEventMob(@PathVariable String key, Model model){
+        if(memberService.getMemberByUserId(key) == null){
+            return "error";
+        }else{
+            memberService.increaseAccessCount(key);
+            model.addAttribute("key", key);
+            model.addAttribute("monsters", monsterService.findAllByEventMob());
+            model.addAttribute("mobGroup", "Event");
+            return "main";
+        }
+    }
+
     @GetMapping("/adminPage")
     public String adminPage(){
         return "adminPage";

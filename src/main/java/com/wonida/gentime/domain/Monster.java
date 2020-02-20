@@ -51,6 +51,9 @@ public class Monster {
     @Column(length = 200)
     private String memo;
 
+    @Column(nullable = false, columnDefinition = "tinyint default 0")
+    private boolean eventMob;
+
     @Builder
     public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup,String memo){
         this.name = name;
