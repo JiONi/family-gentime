@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface MemberRepository extends JpaRepository<MemberUser,String>, CrudRepository<MemberUser,String> {
     @Modifying
@@ -18,4 +19,7 @@ public interface MemberRepository extends JpaRepository<MemberUser,String>, Crud
     @Query("UPDATE MemberUser u SET u.lastAccessTime = ?1 where u.userId = ?2")
     @Transactional
     void updateLastAccessTime(Timestamp accessTime, String id);
+
+    @Query("SELECT u FROM MemberUser u ORDER BY u.lastAccessTime desc")
+    List<MemberUser> findAllOrOrderByLastAccessTime();
 }

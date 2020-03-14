@@ -1,5 +1,6 @@
 package com.wonida.gentime.Controller;
 
+import com.wonida.gentime.domain.MemberUser;
 import com.wonida.gentime.service.MemberService;
 import com.wonida.gentime.service.MonsterService;
 import lombok.AllArgsConstructor;
@@ -19,12 +20,17 @@ public class WebPageController {
 
     @GetMapping("/{key}")
     public String main(@PathVariable String key,  Model model){
-        if(memberService.getMemberByUserId(key) == null){
+        MemberUser user = memberService.getMemberByUserId(key);
+        if(user == null){
             return "error";
         }else{
             memberService.increaseAccessCount(key);
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllDesc());
+            model.addAttribute("user", user);
+            if(user.isAdmin()){
+                model.addAttribute("users", memberService.getMemberAll());
+            }
             return "main";
         }
     }
@@ -44,26 +50,36 @@ public class WebPageController {
 
     @GetMapping("/{key}/mobGroup")
     public String selectByMobGroup(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model){
-        if(memberService.getMemberByUserId(key) == null){
+        MemberUser user = memberService.getMemberByUserId(key);
+        if(user == null){
             return "error";
         }else{
             memberService.increaseAccessCount(key);
             model.addAttribute("key",key);
             model.addAttribute("monsters", monsterService.findAllByMobGroup(mobGroup, mobGroup+1, true));
             model.addAttribute("mobGroup", mobGroup);
+            model.addAttribute("user", user);
+            if(user.isAdmin()){
+                model.addAttribute("users", memberService.getMemberAll());
+            }
             return "main";
         }
     }
 
     @GetMapping("/{key}/generalNamed")
     public String selectGeneralNamed(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model){
-        if(memberService.getMemberByUserId(key) == null){
+        MemberUser user = memberService.getMemberByUserId(key);
+        if(user == null){
             return "error";
         }else{
             memberService.increaseAccessCount(key);
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllByMobGroupGeneral(mobGroup, false));
             model.addAttribute("mobGroup", mobGroup+"Gnrl");
+            model.addAttribute("user", user);
+            if(user.isAdmin()){
+                model.addAttribute("users", memberService.getMemberAll());
+            }
             return "main";
         }
     }

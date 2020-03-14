@@ -26,4 +26,6 @@ public class MemberUser {
     @Column
     private Timestamp lastAccessTime;
 
+    @Column
+    private boolean admin;
 }
