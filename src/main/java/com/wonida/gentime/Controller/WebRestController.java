@@ -17,6 +17,8 @@ public class WebRestController {
     @Autowired
     private MonsterService monsterService;
     @Autowired
+    private MemberService memberService;
+    @Autowired
     private Environment env;
 
     @GetMapping("/hello")
@@ -30,7 +32,8 @@ public class WebRestController {
     }
 
     @PostMapping("/updateGenTime")
-    public MonsterResponseDTO updateGenTime(@RequestParam("id") long id){
+    public MonsterResponseDTO updateGenTime(@RequestParam("id") long id, @RequestParam("userId") String userId){
+        memberService.increaseCutCount(userId);
         return monsterService.updateGenTime(id);
     }
 

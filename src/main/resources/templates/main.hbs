@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <style>
         [class*="col-"] {
             padding: 8px;
@@ -56,7 +58,7 @@
                     <td style="width:150px;">{{location}}</td>
                     <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-success" style="font-size: 10px;" name="nextMobGen"></p></td>
                     <td class="remainTime" style="width:200px;"></td>
-                    <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}')">CUT!</button></td>
+                    <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!</button></td>
                     <input type="hidden" name="genTime" value="{{genTime}}" />
                     <input type="hidden" name="maxTime" value="{{maxTime}}" />
                     <td style="width:300px;">
@@ -100,6 +102,15 @@
         </div>
     </div>
 </div>
+div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+        <!-- 목록 출력 영역 -->
+        <div id="chart_div"></div>
+    </div>
+</div>
+</div>
+
     <!--부트스트랩 js, jquery 추가-->
     <script src="/js/lib/jquery.min.js"></script>
     <script src="/js/lib/bootstrap.min.js"></script>
@@ -107,6 +118,24 @@
 
 </body>
 <script type="text/javascript">
+    /*google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    var users = "{{users}}";
+
+    function drawVisualization(){
+        var data = google.visualization.arrayToDataTable([
+
+        ]);
+
+        var options = {
+
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }*/
+
     var param = "{{mobGroup}}";
 
     $(document).ready(function(){
@@ -175,12 +204,12 @@
         })
     }
 
-    function monsterCut(monsterID){
+    function monsterCut(monsterID, userId){
         if(confirm("현재 시간으로 컷 타임을 저장하시겠습니까?")){
             $.ajax({
                 url : '/updateGenTime',
                 type : 'post',
-                data : {id:monsterID},
+                data : {id:monsterID, userId:userId},
                 success:function(data){
                     $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
                     $("#"+monsterID).find("input[name='maxTime']").val(data.maxTime);

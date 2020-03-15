@@ -28,9 +28,7 @@ public class WebPageController {
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllDesc());
             model.addAttribute("user", user);
-            if(user.isAdmin()){
-                model.addAttribute("users", memberService.getMemberAll());
-            }
+            model.addAttribute("users", memberService.getMemberAll());
             return "main";
         }
     }
@@ -59,9 +57,7 @@ public class WebPageController {
             model.addAttribute("monsters", monsterService.findAllByMobGroup(mobGroup, mobGroup+1, true));
             model.addAttribute("mobGroup", mobGroup);
             model.addAttribute("user", user);
-            if(user.isAdmin()){
-                model.addAttribute("users", memberService.getMemberAll());
-            }
+            model.addAttribute("users", memberService.getMemberAll());
             return "main";
         }
     }
@@ -77,9 +73,7 @@ public class WebPageController {
             model.addAttribute("monsters", monsterService.findAllByMobGroupGeneral(mobGroup, false));
             model.addAttribute("mobGroup", mobGroup+"Gnrl");
             model.addAttribute("user", user);
-            if(user.isAdmin()){
-                model.addAttribute("users", memberService.getMemberAll());
-            }
+            model.addAttribute("users", memberService.getMemberAll());
             return "main";
         }
     }

@@ -22,4 +22,9 @@ public interface MemberRepository extends JpaRepository<MemberUser,String>, Crud
 
     @Query("SELECT u FROM MemberUser u ORDER BY u.lastAccessTime desc")
     List<MemberUser> findAllOrOrderByLastAccessTime();
+
+    @Modifying
+    @Query("UPDATE MemberUser u SET u.cutCount = u.cutCount+1 where u.userId = ?1")
+    @Transactional
+    void increaseCutCount(String id);
 }

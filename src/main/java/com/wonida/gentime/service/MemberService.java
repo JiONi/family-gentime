@@ -33,6 +33,10 @@ public class MemberService {
         memberRepository.increaseAccessCount(userId);
     }
 
+    public void increaseCutCount(String userId){
+        memberRepository.increaseCutCount(userId);
+    }
+
     public List<MemberUser> getMemberAll(){
         return memberRepository.findAllOrOrderByLastAccessTime();
     }
