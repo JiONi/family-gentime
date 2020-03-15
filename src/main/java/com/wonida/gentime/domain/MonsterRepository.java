@@ -54,4 +54,21 @@ public interface MonsterRepository extends JpaRepository<Monster, Long> {
     @Query("UPDATE Monster m SET m.memo = ?1 WHERE m.id = ?2")
     @Transactional
     int updateMonsterMemo(String memo, Long id);
+
+    Stream<Monster> findAllByMaxTimeBeforeAndMobTypeEquals(Timestamp now, boolean mobType);
+
+    @Modifying
+    @Query(value="UPDATE monster SET cut_time = gen_time where max_time < ?1 AND mob_type = 1",nativeQuery=true)
+    @Transactional
+    void autoCuttimeUpdate(Timestamp now);
+
+    @Modifying
+    @Query(value="UPDATE monster SET lost_count = ?1 where id = ?2 AND mob_type = 1",nativeQuery=true)
+    @Transactional
+    void updateLostCount(int lostCount, Long id);
+
+    @Modifying
+    @Query(value="UPDATE Monster m SET m.memo = ?1 where m.id = ?2 AND m.mobType = 1")
+    @Transactional
+    void updateMemo(String memo, Long id);
 }

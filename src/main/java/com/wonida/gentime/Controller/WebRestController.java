@@ -40,6 +40,11 @@ public class WebRestController {
         return monsterService.updateMonsterMemo(memo, id);
     }
 
+    @PostMapping("/clearLostStatus")
+    public void clearLostStatus(){
+        monsterService.clearLostStatus();
+    }
+
     @GetMapping("/profile")
     public String getProfile () {
         return Arrays.stream(env.getActiveProfiles())

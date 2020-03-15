@@ -20,6 +20,7 @@ public class MonsterResponseDTO {
     private int mobGroup;
     private int channel;
     private String memo;
+    private int lostCount;
 
     public MonsterResponseDTO(Monster entity){
         id = entity.getId();
@@ -32,6 +33,8 @@ public class MonsterResponseDTO {
         mobGroup = entity.getMobGroup();
         channel = entity.getChannel();
         memo = entity.getMemo();
+        lostCount = entity.getLostCount();
+
     }
 
     private String toStringDateTime(LocalDateTime localDateTime){

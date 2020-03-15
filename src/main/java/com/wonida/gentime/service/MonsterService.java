@@ -74,6 +74,8 @@ public class MonsterService {
         monsterRepository.updateCutTime(cutTime, id);
         monsterRepository.updateGenTime(id);
         monsterRepository.updateMaxTime(id);
+        monsterRepository.updateLostCount(0, id);
+        monsterRepository.updateMemo("", id);
         MonsterResponseDTO result = new MonsterResponseDTO(monsterRepository.findById(id).get());
         return result;
     }
@@ -81,5 +83,27 @@ public class MonsterService {
     @Transactional
     public int updateMonsterMemo(String memo, Long id){
         return monsterRepository.updateMonsterMemo(memo, id);
+    }
+
+    @Transactional
+    public void clearLostStatus(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Timestamp now = Timestamp.valueOf(localDateTime);
+
+        while(1==1){
+            List<MonsterResponseDTO> result = monsterRepository.findAllByMaxTimeBeforeAndMobTypeEquals(now, true).map(MonsterResponseDTO::new).collect(Collectors.toList());
+            if(result == null || result.size() < 1){
+                break;
+            }else{
+                monsterRepository.autoCuttimeUpdate(now);
+                for(int i=0; i<result.size(); i++){
+                    MonsterResponseDTO monster = result.get(i);
+                    monsterRepository.updateGenTime(monster.getId());
+                    monsterRepository.updateMaxTime(monster.getId());
+                    monsterRepository.updateMemo((monster.getLostCount()+1)+" 타임 놓침", monster.getId());
+                    monsterRepository.updateLostCount(monster.getLostCount()+1, monster.getId());
+                }
+            }
+        }
     }
 }
