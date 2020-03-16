@@ -28,7 +28,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치</button>
         <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아상태 정리하기</button>
         {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자 기록 보기</button>{{/if}}
-        {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
+        {{#if user.superAdmin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
     </div>
     <ul class="list-group list-group-horizontal" style="width:1200px; margin:10px 10px;">
         <a href="/{{key}}" id="totalList" class="list-group-item list-group-item-action">불완전 전체보기</a>

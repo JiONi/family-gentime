@@ -30,5 +30,8 @@ public class MemberUser {
     private boolean admin;
 
     @Column
+    private boolean superAdmin;
+
+    @Column
     private Long cutCount;
 }
