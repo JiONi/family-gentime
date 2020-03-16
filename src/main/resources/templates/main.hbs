@@ -7,6 +7,7 @@
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
     <style>
         [class*="col-"] {
@@ -27,6 +28,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치</button>
         <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아상태 정리하기</button>
         {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자 기록 보기</button>{{/if}}
+        {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
     </div>
     <ul class="list-group list-group-horizontal" style="width:1200px; margin:10px 10px;">
         <a href="/{{key}}" id="totalList" class="list-group-item list-group-item-action">불완전 전체보기</a>
@@ -102,11 +104,11 @@
         </div>
     </div>
 </div>
-div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="width:1200px; height:600px;">
         <!-- 목록 출력 영역 -->
-        <div id="chart_div"></div>
+        <div id="chart_div" style="width:1200px; height:600px;"></div>
     </div>
 </div>
 </div>
@@ -118,23 +120,85 @@ div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-lab
 
 </body>
 <script type="text/javascript">
-    /*google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawVisualization);
 
-    var users = "{{users}}";
 
-    function drawVisualization(){
-        var data = google.visualization.arrayToDataTable([
+    var graphData;
+    var graphDataLen;
 
-        ]);
+    $.ajax({
+        url : '/getUserCutCount',
+        type : 'post',
+        dataType : 'json',
+        success : function(data){
+            graphData = eval('(' + JSON.stringify(data,null, 2) + ')');
+            graphDataLen = graphData.length;
+        }
+    });
 
+    /*google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic(){
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '닉네임');
+        data.addColumn('number', '컷 횟수');
+
+
+        for (var i = 0; i < graphDataLen; i++) {
+            var userName = graphData[i].userName;
+            var cutCount = graphData[i].cutCount;
+            data.addRows([
+                [userName,cutCount]
+            ]);
+        }
         var options = {
-
+            width:1200,
+            height:600,
+            hAxis: {
+                title: '컷 횟수',
+                minValue: 0
+            },
+            vAxis: {
+                title: '닉네임'
+            }
         };
 
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }*/
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '닉네임');
+        data.addColumn('number', '컷 횟수');
+
+
+        for (var i = 0; i < graphDataLen; i++) {
+            var userName = graphData[i].userName;
+            var cutCount = graphData[i].cutCount;
+            data.addRows([
+                [userName,cutCount]
+            ]);
+        }
+
+        var options = {
+            chartArea : {
+                width : '90%'
+            },
+            width : 1100,
+            height : 600
+        };
+
+        var chart = new google.visualization.ColumnChart(
+                document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    }
+
 
     var param = "{{mobGroup}}";
 

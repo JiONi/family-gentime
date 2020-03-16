@@ -2,6 +2,7 @@ package com.wonida.gentime.Controller;
 import com.wonida.gentime.DTO.GenTimeSettingDTO;
 import com.wonida.gentime.DTO.MonsterInfoDTO;
 import com.wonida.gentime.DTO.MonsterResponseDTO;
+import com.wonida.gentime.domain.MemberUser;
 import com.wonida.gentime.service.MemberService;
 import com.wonida.gentime.service.MonsterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class WebRestController {
     @PostMapping("/clearLostStatus")
     public void clearLostStatus(){
         monsterService.clearLostStatus();
+    }
+
+    @PostMapping("/getUserCutCount")
+    public List<MemberUser> getUserCutCount(){
+        return memberService.getUserCutCount();
     }
 
     @GetMapping("/profile")

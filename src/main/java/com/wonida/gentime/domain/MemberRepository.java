@@ -27,4 +27,7 @@ public interface MemberRepository extends JpaRepository<MemberUser,String>, Crud
     @Query("UPDATE MemberUser u SET u.cutCount = u.cutCount+1 where u.userId = ?1")
     @Transactional
     void increaseCutCount(String id);
+
+    @Query("SELECT u FROM MemberUser u ORDER BY u.cutCount DESC")
+    List<MemberUser> findUserCutCount();
 }

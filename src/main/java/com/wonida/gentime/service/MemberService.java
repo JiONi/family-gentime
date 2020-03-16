@@ -40,4 +40,8 @@ public class MemberService {
     public List<MemberUser> getMemberAll(){
         return memberRepository.findAllOrOrderByLastAccessTime();
     }
+
+    public List<MemberUser> getUserCutCount(){
+        return memberRepository.findUserCutCount();
+    }
 }
