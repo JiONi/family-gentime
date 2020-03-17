@@ -26,6 +26,8 @@
 <div class="container float-left">
     <div class="btn-group" role="group" aria-label="Basic example" style="margin:10px 10px;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl4">오만 파랭이 위치</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl5">좌절 파랭이 위치</button>
         <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아상태 정리하기</button>
         {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자 기록 보기</button>{{/if}}
         {{#if user.superAdmin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
@@ -111,6 +113,20 @@
         <div id="chart_div" style="width:1200px; height:600px;"></div>
     </div>
 </div>
+</div>
+<div class="modal fade bd-example-modal-xl4" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <img src="/image/lib/namedMobLocation2.jpg" />
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-xl5" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <img src="/image/lib/namedMobLocation3.jpg" />
+        </div>
+    </div>
 </div>
 
     <!--부트스트랩 js, jquery 추가-->
