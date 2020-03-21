@@ -57,6 +57,9 @@ public class Monster {
     @Column(columnDefinition = "integer default 0")
     private int lostCount;
 
+    @Column(nullable = false, columnDefinition = "tinyint default 0")
+    private boolean hideYn;
+
     @Builder
     public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup,String memo){
         this.name = name;

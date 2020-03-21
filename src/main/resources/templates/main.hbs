@@ -28,7 +28,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl4">오만 파랭이 위치</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl5">좌절 파랭이 위치</button>
-        <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아상태 정리하기</button>
+        <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아전체 칼젠변경</button>
         {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자 기록 보기</button>{{/if}}
         {{#if user.superAdmin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
     </div>
@@ -51,7 +51,8 @@
             <th style="width:150px;">위치</th>
             <th style="width:150px;">젠 예정 시간</th>
             <th style="width:200px;">남은 시간</th>
-            <th style="width:200px;">컷</th>
+            <th style="width:100px;">컷</th>
+            <th style="width:200px;">칼젠 변경</th>
             <th style="width:300px;">메모</th>
         </tr>
         </thead>
@@ -62,7 +63,8 @@
                     <td style="width:150px;">{{location}}</td>
                     <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-success" style="font-size: 10px;" name="nextMobGen"></p></td>
                     <td class="remainTime" style="width:200px;"></td>
-                    <td style="width:200px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!</button></td>
+                    <td style="width:100px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!</button></td>
+                    <td style="width:200px;"><button type="button" class="btn btn-light" style="background-color:#00498C; color:white;" onclick="clearLostStatusOne('{{id}}')">칼젠으로 변경</button></td>
                     <input type="hidden" name="genTime" value="{{genTime}}" />
                     <input type="hidden" name="maxTime" value="{{maxTime}}" />
                     <td style="width:300px;">
@@ -277,6 +279,17 @@
     function clearLostStatus(){
         $.ajax({
             url : '/clearLostStatus',
+            type : 'post',
+            success:function(){
+                location.reload();
+            }
+        })
+    }
+
+    function clearLostStatusOne(monsterID){
+        $.ajax({
+            url : '/clearLostStatusOne',
+            data : {id:monsterID},
             type : 'post',
             success:function(){
                 location.reload();

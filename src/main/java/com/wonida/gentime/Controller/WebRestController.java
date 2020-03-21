@@ -49,6 +49,11 @@ public class WebRestController {
         monsterService.clearLostStatus();
     }
 
+    @PostMapping("/clearLostStatusOne")
+    public void clearLostStatusOne(@RequestParam("id") long id){
+        monsterService.clearLostStatusOne(id);
+    }
+
     @PostMapping("/getUserCutCount")
     public List<MemberUser> getUserCutCount(){
         return memberService.getUserCutCount();
