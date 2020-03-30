@@ -34,4 +34,7 @@ public class MemberUser {
 
     @Column
     private Long cutCount;
+
+    @Column
+    private boolean useYn;
 }

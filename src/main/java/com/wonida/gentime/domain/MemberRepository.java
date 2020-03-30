@@ -30,4 +30,6 @@ public interface MemberRepository extends JpaRepository<MemberUser,String>, Crud
 
     @Query("SELECT u FROM MemberUser u ORDER BY u.cutCount DESC")
     List<MemberUser> findUserCutCount();
+
+    MemberUser findByUserIdAndUseYn(String userId, boolean useYn);
 }

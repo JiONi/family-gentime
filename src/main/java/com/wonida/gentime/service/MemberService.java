@@ -18,11 +18,11 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public MemberUser getMemberByUserId(String userId) {
-        Optional<MemberUser> memberUserList = memberRepository.findById(userId);
-        if(!memberUserList.isPresent()){
+        MemberUser memberUser = memberRepository.findByUserIdAndUseYn(userId, true);
+        if(memberUser == null){
             return null;
         }else{
-            return memberUserList.get();
+            return memberUser;
         }
     }
 
