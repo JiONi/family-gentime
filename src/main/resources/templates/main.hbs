@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>마이크로 소프트에 오신 것을 환영합니다.</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -12,9 +12,10 @@
     <style>
         [class*="col-"] {
             padding: 8px;
-            border: 1px solid rgba(80,80,80,0.1);
+            border: 1px solid rgba(80, 80, 80, 0.1);
             text-align: center;
         }
+
         [class*="hour"] {
             padding: 8px;
             border: 1px solid #005cbf;
@@ -25,67 +26,96 @@
 <body>
 <div class="container float-left">
     <div class="btn-group" role="group" aria-label="Basic example" style="margin:10px 10px;">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl4">오만 파랭이 위치</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl5">좌절 파랭이 위치</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">허상 파랭이 위치
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl4">오만 파랭이
+            위치
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl5">좌절 파랭이
+            위치
+        </button>
         <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아전체 칼젠변경</button>
-        {{#if user.admin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자 기록 보기</button>{{/if}}
-        {{#if user.superAdmin}}<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수 기록 보기</button>{{/if}}
+        {{#if user.admin}}
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자
+                기록 보기
+            </button>{{/if}}
+        {{#if user.superAdmin}}
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl3">컷 횟수
+                기록 보기
+            </button>{{/if}}
     </div>
     <ul class="list-group list-group-horizontal" style="width:1200px; margin:10px 10px;">
         <a href="/{{key}}" id="totalList" class="list-group-item list-group-item-action">불완전 전체보기</a>
-        <a href="/{{key}}/mobGroup?mobGroup=3" id="mobGroup3" class="list-group-item list-group-item-action">파멸, 화산 불완전</a>
-        <a href="/{{key}}/mobGroup?mobGroup=1" id="mobGroup1" class="list-group-item list-group-item-action">허상, 비텐 불완전</a>
-        <a href="/{{key}}/generalNamed?mobGroup=2" id="mobGroup2Gnrl" class="list-group-item list-group-item-action">허상 일반네임드</a>
-        <a href="/{{key}}/generalNamed?mobGroup=1" id="mobGroup1Gnrl" class="list-group-item list-group-item-action">비텐 일반네임드</a>
+        <a href="/{{key}}/mobGroup?mobGroup=3" id="mobGroup3" class="list-group-item list-group-item-action">파멸, 화산
+            불완전</a>
+        <a href="/{{key}}/mobGroup?mobGroup=1" id="mobGroup1" class="list-group-item list-group-item-action">허상, 비텐
+            불완전</a>
+        <a href="/{{key}}/generalNamed?mobGroup=2" id="mobGroup2Gnrl" class="list-group-item list-group-item-action">허상
+            일반네임드</a>
+        <a href="/{{key}}/generalNamed?mobGroup=1" id="mobGroup1Gnrl" class="list-group-item list-group-item-action">비텐
+            일반네임드</a>
         <!--<a href="/{{key}}/eventMob" id="mobGroupEvent" class="list-group-item list-group-item-action">이벤트 몹</a>-->
 
     </ul>
 </div>
 
-    <!-- 목록 출력 영역 -->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th style="width:150px;">몹</th>
-            <th style="width:150px;">위치</th>
-            <th style="width:150px;">젠 예정 시간</th>
-            <th style="width:200px;">남은 시간</th>
-            <th style="width:100px;">컷</th>
-            <th style="width:200px;">칼젠 변경</th>
-            <th style="width:300px;">메모</th>
+<!-- 목록 출력 영역 -->
+<table class="table table-horizontal table-bordered">
+    <thead class="thead-strong">
+    <tr>
+        <th style="width:150px;">몹</th>
+        <th style="width:150px;">위치</th>
+        <th style="width:150px;">젠 예정 시간</th>
+        <th style="width:200px;">남은 시간</th>
+        <th style="width:100px;">컷</th>
+        <th style="width:200px;">칼젠 변경</th>
+        <th style="width:300px;">메모</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#monsters}}
+        <tr class="monsterGenTime" id="{{id}}">
+            <td style="width:150px;">{{name}}   {{#if mobType}}
+                <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}}
+                <span class="badge badge-warning">{{channel}}채널</span>{{/if}} {{#if serverNo}}
+                <span class="badge badge-warning">{{serverNo}}서버</span>{{/if}}</td>
+            <td style="width:150px;">{{location}}</td>
+            <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-success" style="font-size: 10px;"
+                                                                      name="nextMobGen"></p></td>
+            <td class="remainTime" style="width:200px;"></td>
+            <td style="width:100px;">
+                <button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!
+                </button>
+            </td>
+            <td style="width:200px;">
+                <button type="button" class="btn btn-light" style="background-color:#00498C; color:white;"
+                        onclick="clearLostStatusOne('{{id}}')">칼젠으로 변경
+                </button>
+            </td>
+            <input type="hidden" name="genTime" value="{{genTime}}"/>
+            <input type="hidden" name="maxTime" value="{{maxTime}}"/>
+            <td style="width:300px;">
+                <div class="input-group">
+                    <textarea class="form-control" style="height:35px;" name="memo"
+                              placeholder="해당 몹에 대한 메모를 입력해주세요.">{{memo}}</textarea>
+                    <button type="button" class="btn btn-secondary" onclick="saveMemo('{{id}}')">입력</button>
+                </div>
+            </td>
         </tr>
-        </thead>
-        <tbody id="tbody">
-            {{#monsters}}
-                <tr class="monsterGenTime" id="{{id}}">
-                <td style="width:150px;">{{name}}   {{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}} {{#if serverNo}}<span class="badge badge-warning">{{serverNo}}서버</span>{{/if}}</td>
-                    <td style="width:150px;">{{location}}</td>
-                    <td class="genTime" style="width:150px;">{{genTimeStr}}<p class="text-success" style="font-size: 10px;" name="nextMobGen"></p></td>
-                    <td class="remainTime" style="width:200px;"></td>
-                    <td style="width:100px;"><button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!</button></td>
-                    <td style="width:200px;"><button type="button" class="btn btn-light" style="background-color:#00498C; color:white;" onclick="clearLostStatusOne('{{id}}')">칼젠으로 변경</button></td>
-                    <input type="hidden" name="genTime" value="{{genTime}}" />
-                    <input type="hidden" name="maxTime" value="{{maxTime}}" />
-                    <td style="width:300px;">
-                        <div class="input-group">
-                            <textarea class="form-control" style="height:35px;" name="memo" placeholder="해당 몹에 대한 메모를 입력해주세요.">{{memo}}</textarea>
-                            <button type="button" class="btn btn-secondary" onclick="saveMemo('{{id}}')">입력</button>
-                        </div>
-                    </td>
-                </tr>
-            {{/monsters}}
-        </tbody>
-    </table>
+    {{/monsters}}
+    </tbody>
+</table>
 <!-- Modal -->
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-           <img src="/image/lib/namedMobLocation.jpg" />
+            <img src="/image/lib/namedMobLocation.jpg"/>
         </div>
     </div>
 </div>
-<div class="modal fade bd-example-modal-xl2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <!-- 목록 출력 영역 -->
@@ -99,7 +129,9 @@
                 <tbody id="tbody">
                 {{#users}}
                     <tr class="monsterGenTime" id="{{id}}">
-                        <td style="width:150px;">{{userName}}   <!--{{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}-->  {{#if channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
+                        <td style="width:150px;">{{userName}}
+                            <!--{{#if mobType}} <span class="badge badge-pill badge-dark">불완전</span>{{/if}}-->  {{#if
+                                    channel}} <span class="badge badge-warning">{{channel}}채널</span>{{/if}}</td>
                         <td style="width:150px;">{{lastAccessTime}}</td>
                     </tr>
                 {{/users}}
@@ -108,32 +140,35 @@
         </div>
     </div>
 </div>
-<div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content" style="width:1200px; height:600px;">
-        <!-- 목록 출력 영역 -->
-        <div id="chart_div" style="width:1200px; height:600px;"></div>
-    </div>
-</div>
-</div>
-<div class="modal fade bd-example-modal-xl4" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <img src="/image/lib/namedMobLocation2.png" />
+        <div class="modal-content" style="width:1200px; height:600px;">
+            <!-- 목록 출력 영역 -->
+            <div id="chart_div" style="width:1200px; height:600px;"></div>
         </div>
     </div>
 </div>
-<div class="modal fade bd-example-modal-xl5" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl4" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            <img src="/image/lib/namedMobLocation3.png" />
+            <img src="/image/lib/namedMobLocation2.png"/>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-xl5" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <img src="/image/lib/namedMobLocation3.png"/>
         </div>
     </div>
 </div>
 
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/lib/jquery.min.js"></script>
-    <script src="/js/lib/bootstrap.min.js"></script>
+<!--부트스트랩 js, jquery 추가-->
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
 
 
 </body>
@@ -144,11 +179,11 @@
     var graphDataLen;
 
     $.ajax({
-        url : '/getUserCutCount',
-        type : 'post',
-        dataType : 'json',
-        success : function(data){
-            graphData = eval('(' + JSON.stringify(data,null, 2) + ')');
+        url: '/getUserCutCount',
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+            graphData = eval('(' + JSON.stringify(data, null, 2) + ')');
             graphDataLen = graphData.length;
         }
     });
@@ -199,16 +234,16 @@
             var userName = graphData[i].userName;
             var cutCount = graphData[i].cutCount;
             data.addRows([
-                [userName,cutCount]
+                [userName, cutCount]
             ]);
         }
 
         var options = {
-            chartArea : {
-                width : '90%'
+            chartArea: {
+                width: '90%'
             },
-            width : 1100,
-            height : 600
+            width: 1100,
+            height: 600
         };
 
         var chart = new google.visualization.ColumnChart(
@@ -220,125 +255,122 @@
 
     var param = "{{mobGroup}}";
 
-    $(document).ready(function(){
-        setInterval(function()
-        {
+    $(document).ready(function () {
+        setInterval(function () {
             setRemainTime();
             nextMobGen();
-        },1000);
+        }, 1000);
 
 
-        if(param == ""){
+        if (param == "") {
             $("#totalList").addClass("list-group-item-primary");
-        }else{
-            $("#mobGroup"+param).addClass("list-group-item-primary");
+        } else {
+            $("#mobGroup" + param).addClass("list-group-item-primary");
         }
     });
 
 
-    function setRemainTime(){
-        $(".monsterGenTime").each(function(){
+    function setRemainTime() {
+        $(".monsterGenTime").each(function () {
             getRemainTime($(this).find("input[name='genTime']").val(), $(this).find("input[name='maxTime']").val(), $(this).find(".remainTime"));
         });
     }
 
-    function getRemainTime(genTime, maxTime, obj){
+    function getRemainTime(genTime, maxTime, obj) {
         var now = new Date();
         var time = new Date(genTime);
-        var gap = new Date(0,0,0,0,0,0,time-now);
+        var gap = new Date(0, 0, 0, 0, 0, 0, time - now);
         var diffHour = gap.getHours();
         var diffMin = gap.getMinutes();
         var diffSec = gap.getSeconds();
 
-        if(time < now){
+        if (time < now) {
             var maxTime = new Date(maxTime);
 
-            if(now > maxTime){
+            if (now > maxTime) {
                 obj.removeClass("text-primary");
                 obj.removeClass("text-danger");
 
                 obj.text("미아 상태");
-            }else{
+            } else {
                 obj.removeClass("text-danger");
                 obj.addClass("text-primary");
                 obj.text("젠 타임!!!");
             }
-        }else{
-            if(diffHour == 0 && diffMin <=4){
+        } else {
+            if (diffHour == 0 && diffMin <= 4) {
                 obj.addClass("text-danger");
-            }else{
+            } else {
                 obj.removeClass("text-danger");
             }
-            obj.text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
+            obj.text(diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
         }
 
 
-
     }
 
-    function clearLostStatus(){
+    function clearLostStatus() {
         $.ajax({
-            url : '/clearLostStatus',
-            type : 'post',
-            success:function(){
+            url: '/clearLostStatus',
+            type: 'post',
+            success: function () {
                 location.reload();
             }
         })
     }
 
-    function clearLostStatusOne(monsterID){
+    function clearLostStatusOne(monsterID) {
         $.ajax({
-            url : '/clearLostStatusOne',
-            data : {id:monsterID},
-            type : 'post',
-            success:function(){
+            url: '/clearLostStatusOne',
+            data: {id: monsterID},
+            type: 'post',
+            success: function () {
                 location.reload();
             }
         })
     }
 
-    function monsterCut(monsterID, userId){
-        if(confirm("현재 시간으로 컷 타임을 저장하시겠습니까?")){
+    function monsterCut(monsterID, userId) {
+        if (confirm("현재 시간으로 컷 타임을 저장하시겠습니까?")) {
             $.ajax({
-                url : '/updateGenTime',
-                type : 'post',
-                data : {id:monsterID, userId:userId},
-                success:function(data){
-                    $("#"+monsterID).find("input[name='genTime']").val(data.genTime);
-                    $("#"+monsterID).find("input[name='maxTime']").val(data.maxTime);
-                    $("#"+monsterID).find(".genTime").text(data.genTimeStr);
+                url: '/updateGenTime',
+                type: 'post',
+                data: {id: monsterID, userId: userId},
+                success: function (data) {
+                    $("#" + monsterID).find("input[name='genTime']").val(data.genTime);
+                    $("#" + monsterID).find("input[name='maxTime']").val(data.maxTime);
+                    $("#" + monsterID).find(".genTime").text(data.genTimeStr);
                     location.reload();
                 }
             });
-        }else{
+        } else {
             return false;
         }
     }
 
 
-
-    function getGenList(mobGroup){
+    function getGenList(mobGroup) {
         $.ajax({
-            url : '/selectGenList',
-            type : 'post',
-            data : {mobGroup : mobGroup},
-            success : function(data){
+            url: '/selectGenList',
+            type: 'post',
+            data: {mobGroup: mobGroup},
+            success: function (data) {
                 drawList(data);
             }
         })
     }
 
-    function saveMemo(monsterID){
-        var memo = $("#"+monsterID).find("textarea[name='memo']").val();
-        if(memo == "" || memo == null){
+    function saveMemo(monsterID) {
+        var memo = $("#" + monsterID).find("textarea[name='memo']").val();
+        if (memo == "" || memo == null) {
             alert("입력된 내용이 없습니다.");
             return;
-        }else{
+        } else {
             $.ajax({
-                url : '/updateMonsterMemo',
-                type : 'post',
-                data : {memo:memo, id:monsterID},
-                success : function(){
+                url: '/updateMonsterMemo',
+                type: 'post',
+                data: {memo: memo, id: monsterID},
+                success: function () {
                     alert("메모 입력이 완료되었습니다.");
                     location.reload();
                 }
@@ -347,59 +379,59 @@
 
     }
 
-    function nextMobGen(){
+    function nextMobGen() {
         var totalLength = $(".monsterGenTime").length;
-        $(".monsterGenTime").each(function(index){
+        $(".monsterGenTime").each(function (index) {
             var objThis = $(".monsterGenTime").eq(index);
-            var objNext = $(".monsterGenTime").eq(index+1);
+            var objNext = $(".monsterGenTime").eq(index + 1);
 
-            if(objThis.find(".remainTime").text() != "미아 상태" && index != totalLength-1){
+            if (objThis.find(".remainTime").text() != "미아 상태" && index != totalLength - 1) {
                 var thisTime = new Date(objThis.find("input[name='genTime']").val());
                 var nextTime = new Date(objNext.find("input[name='genTime']").val());
-                var gap = new Date(0,0,0,0,0,0,nextTime-thisTime);
+                var gap = new Date(0, 0, 0, 0, 0, 0, nextTime - thisTime);
                 var diffHour = gap.getHours();
                 var diffMin = gap.getMinutes();
                 var diffSec = gap.getSeconds();
 
-                if(diffHour == 0){
-                    if(diffMin < 5){
+                if (diffHour == 0) {
+                    if (diffMin < 5) {
                         objThis.find("[name='nextMobGen']").addClass("text-danger");
                         objThis.find("[name='nextMobGen']").removeClass("text-success")
                     }
-                    if(diffMin == 0){
-                        objThis.find("[name='nextMobGen']").text(diffSec+"초");
-                    }else{
-                        objThis.find("[name='nextMobGen']").text(diffMin+"분 "+diffSec+"초");
+                    if (diffMin == 0) {
+                        objThis.find("[name='nextMobGen']").text(diffSec + "초");
+                    } else {
+                        objThis.find("[name='nextMobGen']").text(diffMin + "분 " + diffSec + "초");
                     }
 
-                }else{
-                    objThis.find("[name='nextMobGen']").text(diffHour+"시간 "+diffMin+"분 "+diffSec+"초");
+                } else {
+                    objThis.find("[name='nextMobGen']").text(diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
                 }
 
-            }else{
+            } else {
                 objThis.find("[name='nextMobGen']").text("");
             }
         });
     }
 
-    function drawList(listData){
-       /* console.log(listData);
-        //핸들바 템플릿 가져오기
-        var source = $("#entry-template").html();
+    function drawList(listData) {
+        /* console.log(listData);
+         //핸들바 템플릿 가져오기
+         var source = $("#entry-template").html();
 
-        //핸들바 템플릿 컴파일
-        var template = Handlebars.compile(source);
+         //핸들바 템플릿 컴파일
+         var template = Handlebars.compile(source);
 
-        //핸들바 템플릿에 바인딩할 데이터
-        var data = {
-            monsters: listData
-        };
+         //핸들바 템플릿에 바인딩할 데이터
+         var data = {
+             monsters: listData
+         };
 
-        //핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
-        var html = template(data);
+         //핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
+         var html = template(data);
 
-        //생성된 HTML을 DOM에 주입
-        $("#tbody").append(html);*/
+         //생성된 HTML을 DOM에 주입
+         $("#tbody").append(html);*/
     }
 </script>
 </html>

@@ -20,7 +20,7 @@ public class MonsterInfoDTO {
     private int mobGroup;
     private String memo;
 
-    public Monster toEntity(){
+    public Monster toEntity() {
         return Monster.builder()
                 .name(name)
                 .location(location)

@@ -19,11 +19,11 @@ public class WebPageController {
     private MemberService memberService;
 
     @GetMapping("/{key}")
-    public String main(@PathVariable String key,  Model model){
+    public String main(@PathVariable String key, Model model) {
         MemberUser user = memberService.getMemberByUserId(key);
-        if(user == null){
+        if (user == null) {
             return "error";
-        }else{
+        } else {
             memberService.increaseAccessCount(key);
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllDesc());
@@ -34,12 +34,12 @@ public class WebPageController {
     }
 
     @GetMapping("/{key}/genTermList")
-    public String genTerm3hour(@PathVariable String key, @RequestParam("genTerm") int genTerm, Model model){
-        if(memberService.getMemberByUserId(key) == null){
+    public String genTerm3hour(@PathVariable String key, @RequestParam("genTerm") int genTerm, Model model) {
+        if (memberService.getMemberByUserId(key) == null) {
             return "error";
-        }else{
+        } else {
             memberService.increaseAccessCount(key);
-            model.addAttribute("key",key);
+            model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllByGenTerm(genTerm));
             model.addAttribute("genTerm", genTerm);
             return "main";
@@ -47,14 +47,14 @@ public class WebPageController {
     }
 
     @GetMapping("/{key}/mobGroup")
-    public String selectByMobGroup(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model){
+    public String selectByMobGroup(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model) {
         MemberUser user = memberService.getMemberByUserId(key);
-        if(user == null){
+        if (user == null) {
             return "error";
-        }else{
+        } else {
             memberService.increaseAccessCount(key);
-            model.addAttribute("key",key);
-            model.addAttribute("monsters", monsterService.findAllByMobGroup(mobGroup, mobGroup+1, true));
+            model.addAttribute("key", key);
+            model.addAttribute("monsters", monsterService.findAllByMobGroup(mobGroup, mobGroup + 1, true));
             model.addAttribute("mobGroup", mobGroup);
             model.addAttribute("user", user);
             model.addAttribute("users", memberService.getMemberAll());
@@ -63,15 +63,15 @@ public class WebPageController {
     }
 
     @GetMapping("/{key}/generalNamed")
-    public String selectGeneralNamed(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model){
+    public String selectGeneralNamed(@PathVariable String key, @RequestParam("mobGroup") int mobGroup, Model model) {
         MemberUser user = memberService.getMemberByUserId(key);
-        if(user == null){
+        if (user == null) {
             return "error";
-        }else{
+        } else {
             memberService.increaseAccessCount(key);
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllByMobGroupGeneral(mobGroup, false));
-            model.addAttribute("mobGroup", mobGroup+"Gnrl");
+            model.addAttribute("mobGroup", mobGroup + "Gnrl");
             model.addAttribute("user", user);
             model.addAttribute("users", memberService.getMemberAll());
             return "main";
@@ -79,10 +79,10 @@ public class WebPageController {
     }
 
     @GetMapping("/{key}/eventMob")
-    public String selectEventMob(@PathVariable String key, Model model){
-        if(memberService.getMemberByUserId(key) == null){
+    public String selectEventMob(@PathVariable String key, Model model) {
+        if (memberService.getMemberByUserId(key) == null) {
             return "error";
-        }else{
+        } else {
             memberService.increaseAccessCount(key);
             model.addAttribute("key", key);
             model.addAttribute("monsters", monsterService.findAllByEventMob());
@@ -92,7 +92,7 @@ public class WebPageController {
     }
 
     @GetMapping("/adminPage")
-    public String adminPage(){
+    public String adminPage() {
         return "adminPage";
     }
 }

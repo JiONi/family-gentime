@@ -19,29 +19,29 @@ public class MemberService {
 
     public MemberUser getMemberByUserId(String userId) {
         MemberUser memberUser = memberRepository.findByUserIdAndUseYn(userId, true);
-        if(memberUser == null){
+        if (memberUser == null) {
             return null;
-        }else{
+        } else {
             return memberUser;
         }
     }
 
-    public void increaseAccessCount(String userId){
+    public void increaseAccessCount(String userId) {
         LocalDateTime localDateTime = LocalDateTime.now();
         Timestamp accessTime = Timestamp.valueOf(localDateTime);
-        memberRepository.updateLastAccessTime(accessTime,userId);
+        memberRepository.updateLastAccessTime(accessTime, userId);
         memberRepository.increaseAccessCount(userId);
     }
 
-    public void increaseCutCount(String userId){
+    public void increaseCutCount(String userId) {
         memberRepository.increaseCutCount(userId);
     }
 
-    public List<MemberUser> getMemberAll(){
+    public List<MemberUser> getMemberAll() {
         return memberRepository.findAllOrOrderByLastAccessTime();
     }
 
-    public List<MemberUser> getUserCutCount(){
+    public List<MemberUser> getUserCutCount() {
         return memberRepository.findUserCutCount();
     }
 }

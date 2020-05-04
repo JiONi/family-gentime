@@ -23,7 +23,7 @@ public class MonsterResponseDTO {
     private int lostCount;
     private int serverNo;
 
-    public MonsterResponseDTO(Monster entity){
+    public MonsterResponseDTO(Monster entity) {
         id = entity.getId();
         name = entity.getName();
         location = entity.getLocation();
@@ -38,7 +38,7 @@ public class MonsterResponseDTO {
         serverNo = entity.getServerNo();
     }
 
-    private String toStringDateTime(LocalDateTime localDateTime){
+    private String toStringDateTime(LocalDateTime localDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return Optional.ofNullable(localDateTime)
                 .map(formatter::format)

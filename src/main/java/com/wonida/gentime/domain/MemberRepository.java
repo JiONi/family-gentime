@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface MemberRepository extends JpaRepository<MemberUser,String>, CrudRepository<MemberUser,String> {
+public interface MemberRepository extends JpaRepository<MemberUser, String>, CrudRepository<MemberUser, String> {
     @Modifying
     @Query("UPDATE MemberUser u SET u.accessCount = u.accessCount+1 where u.userId = ?1")
     @Transactional

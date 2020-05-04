@@ -64,7 +64,7 @@ public class Monster {
     private int serverNo;
 
     @Builder
-    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup,String memo){
+    public Monster(String name, String location, int genTerm, int randomTime, boolean mobType, String cutTime, int mobGroup, String memo) {
         this.name = name;
         this.location = location;
         this.genTerm = genTerm;
@@ -75,11 +75,11 @@ public class Monster {
         this.memo = memo;
     }
 
-    public Monster(Timestamp cutTime){
+    public Monster(Timestamp cutTime) {
         this.cutTime = cutTime;
     }
 
-    private Timestamp toTimeStampString(String localDateTime){
+    private Timestamp toTimeStampString(String localDateTime) {
         Timestamp timestamp = Timestamp.valueOf(localDateTime);
         return timestamp;
     }

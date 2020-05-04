@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name="USER")
+@Table(name = "USER")
 public class MemberUser {
 
     @Id
