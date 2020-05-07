@@ -34,7 +34,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl5">좌절 파랭이
             위치
         </button>
-        <button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아전체 칼젠변경</button>
+        <!--<button type="button" class="btn btn-warning" onclick="clearLostStatus();">미아전체 칼젠변경</button>-->
         {{#if user.admin}}
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl2">사용자
                 기록 보기
@@ -46,8 +46,8 @@
     </div>
     <ul class="list-group list-group-horizontal" style="width:1200px; margin:10px 10px;">
         <a href="/{{key}}" id="totalList" class="list-group-item list-group-item-action">불완전 전체보기</a>
-        <a href="/{{key}}/mobGroup?mobGroup=3" id="mobGroup3" class="list-group-item list-group-item-action">파멸, 화산
-            불완전</a>
+        <!--<a href="/{{key}}/mobGroup?mobGroup=3" id="mobGroup3" class="list-group-item list-group-item-action">파멸, 화산
+            불완전</a>-->
         <a href="/{{key}}/mobGroup?mobGroup=1" id="mobGroup1" class="list-group-item list-group-item-action">허상, 비텐
             불완전</a>
         <a href="/{{key}}/generalNamed?mobGroup=2" id="mobGroup2Gnrl" class="list-group-item list-group-item-action">허상
@@ -68,7 +68,7 @@
         <th style="width:150px;">젠 예정 시간</th>
         <th style="width:200px;">남은 시간</th>
         <th style="width:100px;">컷</th>
-        <th style="width:200px;">칼젠 변경</th>
+        <!--<th style="width:200px;">칼젠 변경</th>-->
         <th style="width:300px;">메모</th>
     </tr>
     </thead>
@@ -87,11 +87,11 @@
                 <button type="button" class="btn btn-success" onclick="monsterCut('{{id}}','{{user.userId}}')">CUT!
                 </button>
             </td>
-            <td style="width:200px;">
+            <!--<td style="width:200px;">
                 <button type="button" class="btn btn-light" style="background-color:#00498C; color:white;"
                         onclick="clearLostStatusOne('{{id}}')">칼젠으로 변경
                 </button>
-            </td>
+            </td>-->
             <input type="hidden" name="genTime" value="{{genTime}}"/>
             <input type="hidden" name="maxTime" value="{{maxTime}}"/>
             <td style="width:300px;">
