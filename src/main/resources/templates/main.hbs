@@ -280,6 +280,8 @@
         var now = new Date();
         var time = new Date(genTime);
         var gap = new Date(0, 0, 0, 0, 0, 0, time - now);
+        var diffYear = gap.getYear();
+        var diffDate = gap.getDate();
         var diffHour = gap.getHours();
         var diffMin = gap.getMinutes();
         var diffSec = gap.getSeconds();
@@ -298,15 +300,18 @@
                 obj.text("젠 타임!!!");
             }
         } else {
-            if (diffHour == 0 && diffMin <= 4) {
+            if (diffYear != 0 && diffHour == 0 && diffMin <= 4) {
                 obj.addClass("text-danger");
             } else {
                 obj.removeClass("text-danger");
             }
-            obj.text(diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
+            if(diffYear == 0){
+                obj.text(diffDate + "일 " + diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
+            }else{
+                obj.text(diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
+            }
+
         }
-
-
     }
 
     function clearLostStatus() {
